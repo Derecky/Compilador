@@ -1,0 +1,3 @@
+String a = "HELLO";
+print(a);
+int d = 2 + 3;

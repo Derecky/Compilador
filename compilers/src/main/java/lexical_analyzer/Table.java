@@ -15,10 +15,10 @@ public class Table {
     static {
         keywords.put("main", Token_category.main);
         keywords.put("int", Token_category.dlint);
-        keywords.put("real", Token_category.real);
-        keywords.put("bool", Token_category.bool);
+        keywords.put("real", Token_category.dlreal);
+        keywords.put("bool", Token_category.dlbool);
         keywords.put("char", Token_category.dlchar);
-        keywords.put("string", Token_category.string);
+        keywords.put("string", Token_category.dlstring);
         keywords.put("if", Token_category.dlif);
         keywords.put("else", Token_category.dlelse);
         keywords.put("repeat", Token_category.repeat);
@@ -31,12 +31,12 @@ public class Table {
         keywords.put("to", Token_category.to);
 
         delimiters.put(";", Token_category.semicolon);
-        delimiters.put("[", Token_category.squareBeg);
-        delimiters.put("]", Token_category.squareEnd);
-        delimiters.put("(", Token_category.parenthBeg);
-        delimiters.put(")", Token_category.parentEnd);
-        delimiters.put("{", Token_category.keyBeg);
-        delimiters.put("}", Token_category.keyEnd);
+        delimiters.put("[", Token_category.squarebeg);
+        delimiters.put("]", Token_category.squareend);
+        delimiters.put("(", Token_category.parenthbeg);
+        delimiters.put(")", Token_category.parentend);
+        delimiters.put("{", Token_category.keybeg);
+        delimiters.put("}", Token_category.keyend);
 
         separators.put(",", Token_category.comma);
         separators.put(":", Token_category.doublequotes);
@@ -53,8 +53,8 @@ public class Table {
         operators.put("==", Token_category.eq);
         operators.put(">", Token_category.greater);
         operators.put("<", Token_category.smaller);
-        operators.put(">=", Token_category.greaterE);
-        operators.put("<=", Token_category.smallerE);
+        operators.put(">=", Token_category.greatere);
+        operators.put("<=", Token_category.smallere);
 
 
         scopeTokens.add(',');

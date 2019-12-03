@@ -1,4 +1,4 @@
-package ic.ufal.compiladores;
+package lexical_analyzer;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

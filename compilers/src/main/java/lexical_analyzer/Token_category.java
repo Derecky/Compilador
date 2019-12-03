@@ -5,12 +5,12 @@ public enum Token_category {
 	// palavras reservadas		
 	pgm, 
 	dlint,
-	real,
-	string,
+	dlreal,
+	dlstring,
 	dlchar,
-	bool,
+	dlbool,
 	dlvoid,
-	array,
+	dlarray,
 	
 	// comandos
 	dlif,
@@ -26,7 +26,6 @@ public enum Token_category {
 	dlfalse,
 	print,
 	func,
-	error,
 	
 	//identificador
 	identifier,
@@ -45,6 +44,7 @@ public enum Token_category {
 	pow,
 	plus,
 	minus,
+	mod,
 	div,
 	
 	//Operadores logicos
@@ -55,19 +55,19 @@ public enum Token_category {
 	//Operadores relacionais
 	diff,	
 	smaller,
-	smallerE,
-	greaterE,
+	smallere,
+	greatere,
 	greater,
 	
 	// simbolos especiais
 	comment,
 	assign,
-	squareBeg,
-	squareEnd,
-	parenthBeg,
-	parentEnd,
-	keyBeg,
-	keyEnd,
+	squarebeg,
+	squareend,
+	parenthbeg,
+	parentend,
+	keybeg,
+	keyend,
 	points,
 	semicolon,
 	comma,
