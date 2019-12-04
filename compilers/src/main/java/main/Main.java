@@ -15,7 +15,14 @@ public class Main
         
         String path = "./resources/input.txt";
         Lexic lexema = new Lexic(path);
-        lexema.hasNextToken();
+        
+        lexema.hasNextLine();
+        
+//        while(lexema.hasNextLine()) {
+//        	
+//        	
+//        }
+        
         
         //System.out.println(  );
 

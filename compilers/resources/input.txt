@@ -1,3 +1,5 @@
-String a = "HELLO";
-print(a);
-int d = 2 + 3;
+pgm
+	string a = "HELLO";
+	print(a);
+	int d = 2 + 3;
+end_pgm

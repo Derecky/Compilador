@@ -51,7 +51,7 @@ public class Token<TokenCategory> {
 
     @Override
     public String toString() {
-        String fmt = "         [%04d, %04d] (%04d, %20s) {%s}";
-        return String.format(fmt, tokenLine+1, tokenColumn+1, category.ordinal(), category.toString(), value);
+        String fmt = "          [%04d, %04d] (%04d, %20s) {%s}";
+        return String.format(fmt, this.tokenLine+1, this.tokenColumn+1, this.category.ordinal(), this.category.toString(), value);
     }
 }

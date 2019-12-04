@@ -29,6 +29,8 @@ public class Table {
         keywords.put("from", Token_category.from);
         keywords.put("func", Token_category.func);
         keywords.put("to", Token_category.to);
+        keywords.put("pgm", Token_category.pgm);
+        keywords.put("end_pgm", Token_category.endpgm);
 
         delimiters.put(";", Token_category.semicolon);
         delimiters.put("[", Token_category.squarebeg);
