@@ -1,7 +1,7 @@
 package lexical_analyzer;
 
 public class Token<TokenCategory> {
-	private Token_category category;
+    private Token_category category;
     private int tokenLine;
     private int tokenColumn;
     private String value;
