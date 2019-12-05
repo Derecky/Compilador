@@ -1,5 +1,5 @@
 pgm
-	string a = "HELLO";
-	print(a);
-	int d = 2 + 3;
+	string a = "HELLO" ;
+	print ( a ) ;
+	int d = 2 + 3 ;
 end_pgm

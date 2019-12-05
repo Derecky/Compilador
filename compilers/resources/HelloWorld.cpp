@@ -1,5 +1,5 @@
 pgm
-  main{
-    print("Alo mundo!");
+  main {
+    print ( "Alo mundo!" ) ;
   }
 end_pgm

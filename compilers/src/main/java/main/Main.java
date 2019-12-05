@@ -9,22 +9,11 @@ import lexical_analyzer.Lexic;
 public class Main 
 {
 	
-    public static void main( String[] args ) throws FileNotFoundException
+    public static void main( String[] args ) throws FileNotFoundException 
     {
-        //System.out.println( "Hello World!" );
-        
-        String path = "./resources/input.txt";
+        String path = "./resources/Shellsort.cpp";
         Lexic lexema = new Lexic(path);
         
         lexema.hasNextLine();
-        
-//        while(lexema.hasNextLine()) {
-//        	
-//        	
-//        }
-        
-        
-        //System.out.println(  );
-
-    }
+    }       
 }

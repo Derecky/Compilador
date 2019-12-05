@@ -8,6 +8,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Lexic {
@@ -16,6 +18,7 @@ public class Lexic {
 	private BufferedReader buffer;
 	private boolean isinEOF = false;
 	private String[] lexemes;
+	private String line;
 	
 	public Lexic(String path) throws FileNotFoundException {
 		this.currentLine = -1;
@@ -23,6 +26,7 @@ public class Lexic {
 		this.buffer = new BufferedReader(new FileReader(path));
 		
 	}
+	
 	// pega a linha, ´pega os lexemas e faz os tokens, dai imprime 
 	public boolean hasNextLine() {
         if (this.isinEOF) {
@@ -30,12 +34,11 @@ public class Lexic {
         }
 
         try {
-        	String line = currentContent != null ? currentContent.substring(currentColumn) : null;
+        	line = currentContent != null ? currentContent.substring(currentColumn) : null;
         	// ler a linha
             while (line == null || !line.matches("end_pgm")  ) {
                 line = buffer.readLine();
                 currentLine++;
-                
                 
                 if (line == null) {
                     this.isinEOF = true;
@@ -60,11 +63,16 @@ public class Lexic {
 	private void buildLexem(String line) {
 		//System.out.println(line);
 		lexemes = line.split("\\s+|;");
-		//print(lexemes);
-		nextToken();
-		
+//		print(lexemes);
+		nextToken();		
 	}
-	
+
+	private char nextChar() {
+        currentColumn++;
+        if (currentColumn < currentContent.length())
+        	return currentContent.charAt(currentColumn);
+        return '\n';
+	}
 	
 	private Token_category findCategory(String value) {
         if (Table.keywords.containsKey(value)) { // is keyword?
@@ -77,8 +85,7 @@ public class Lexic {
             return Table.operators.get(value);
             
         } else if (Table.delimiters.containsKey(value)) { // is delimiters?
-            return Table.delimiters.get(value);
-            
+            return Table.delimiters.get(value);   
         }
         return types(value);
     }
@@ -108,16 +115,42 @@ public class Lexic {
     }
     
 	public Token nextToken() {
-		
-		List<Token> listToken;
-		Token_category category;
+		//List<Token> listToken;
+		//Token_category category;
 		//print(lexemes);
-		
-		
+
+		int doublequotes = 0;
+		Pattern pattern = Pattern.compile(".*\"([^\']*)\".*"); 
+		Matcher matcher = pattern.matcher(line);
+		if(matcher.matches()) {
+			System.out.println(matcher.group(1));
+		}
+	      
 		for(int i=0; i < lexemes.length; ++i) {
 			if(!lexemes[i].isEmpty()) {
-				Token<Object> token = new Token<Object>( lexemes[i], currentLine, i, findCategory( lexemes[i] ));
-				System.out.println(token.toString());
+				if(lexemes[i].startsWith("\"")) {
+				      doublequotes = 1;
+				}
+				if(doublequotes == 1 && lexemes[i].endsWith("\"")) {
+					lexemes[i] = "\""+matcher.group(1)+"\"";
+					doublequotes = 0;
+				}
+					
+//				if(lexemes[i].endsWith("("))
+//					parent = 1;
+//				if(parent == 1 && lexemes[i].equals(")")) {
+//					parent = 12;
+//				}
+				if(doublequotes == 0) {
+					Token<Object> token = new Token<Object>( lexemes[i], currentLine, i, findCategory( lexemes[i] ));
+					System.out.println(token.toString());
+					
+//					if(lexemes[i].endsWith("(")) {
+//						Token<Object> token2 = new Token<Object>( "(", currentLine, i, findCategory( "(" ));
+//						System.out.println(token2.toString());
+//					}
+					//parent = 0;
+				}
 			}
 		}
 
