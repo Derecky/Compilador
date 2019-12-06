@@ -18,6 +18,7 @@ public class Lexic {
 	private BufferedReader buffer;
 	private boolean isinEOF = false;
 	private String[] lexemes;
+	private String lexeme;
 	private String line;
 	
 	public Lexic(String path) throws FileNotFoundException {
@@ -27,8 +28,7 @@ public class Lexic {
 		
 	}
 	
-	// pega a linha, ´pega os lexemas e faz os tokens, dai imprime 
-	public boolean hasNextLine() {
+	public boolean nextLine() {
         if (this.isinEOF) {
             return false;
         }
@@ -61,10 +61,12 @@ public class Lexic {
 	}
 	
 	private void buildLexem(String line) {
-		//System.out.println(line);
 		lexemes = line.split("\\s+|;");
-//		print(lexemes);
-		nextToken();		
+		
+		for(int i = 0; i < lexemes.length; ++i) {
+			lexeme = lexemes[i];
+			Token token = nextToken();		
+		}
 	}
 
 	private char nextChar() {
@@ -115,45 +117,24 @@ public class Lexic {
     }
     
 	public Token nextToken() {
-		//List<Token> listToken;
-		//Token_category category;
-		//print(lexemes);
-
 		int doublequotes = 0;
 		Pattern pattern = Pattern.compile(".*\"([^\']*)\".*"); 
 		Matcher matcher = pattern.matcher(line);
-		if(matcher.matches()) {
-			System.out.println(matcher.group(1));
-		}
 	      
-		for(int i=0; i < lexemes.length; ++i) {
-			if(!lexemes[i].isEmpty()) {
-				if(lexemes[i].startsWith("\"")) {
-				      doublequotes = 1;
-				}
-				if(doublequotes == 1 && lexemes[i].endsWith("\"")) {
-					lexemes[i] = "\""+matcher.group(1)+"\"";
-					doublequotes = 0;
-				}
-					
-//				if(lexemes[i].endsWith("("))
-//					parent = 1;
-//				if(parent == 1 && lexemes[i].equals(")")) {
-//					parent = 12;
-//				}
-				if(doublequotes == 0) {
-					Token<Object> token = new Token<Object>( lexemes[i], currentLine, i, findCategory( lexemes[i] ));
-					System.out.println(token.toString());
-					
-//					if(lexemes[i].endsWith("(")) {
-//						Token<Object> token2 = new Token<Object>( "(", currentLine, i, findCategory( "(" ));
-//						System.out.println(token2.toString());
-//					}
-					//parent = 0;
-				}
+		if(!lexeme.isEmpty()) {
+			if(lexeme.startsWith("\"")) {
+			      doublequotes = 1;		
+			}
+			if(doublequotes == 1 && lexeme.endsWith("\"")) {
+				lexeme = "\""+matcher.group(1)+"\"";
+				doublequotes = 0;	
+			}
+			if(doublequotes == 0) {
+				Token<Object> token = new Token<Object>( lexeme, currentLine, i, findCategory( lexeme ));
+				System.out.println(token.toString());
+				return token;
 			}
 		}
-
 		return null;
 	}
 	

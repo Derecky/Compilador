@@ -14,6 +14,6 @@ public class Main
         String path = "./resources/Shellsort.cpp";
         Lexic lexema = new Lexic(path);
         
-        lexema.hasNextLine();
+        lexema.nextLine();
     }       
 }
