@@ -31,11 +31,11 @@ public enum Token_category {
 	identifier,
 	
 	//Literais
-//	litint,
-//	litchar,
-//	litstring,
-//	litbool,
-//	litreal,
+	litint,
+	litchar,
+	litstring,
+	litbool,
+	litreal,
 	
 	//Operadores aritmeticos
 	eq,
@@ -73,5 +73,7 @@ public enum Token_category {
 	comma,
 	doublequotes,
 	
-	dlnull
+	dlnull,
+	
+	unknown
 }

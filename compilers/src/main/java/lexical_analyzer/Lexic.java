@@ -18,17 +18,15 @@ public class Lexic {
 	private BufferedReader buffer;
 	private boolean isinEOF = false;
 	private String[] lexemes;
-	private String lexeme;
 	private String line;
 	
 	public Lexic(String path) throws FileNotFoundException {
 		this.currentLine = -1;
 		this.currentColumn = 0;
-		this.buffer = new BufferedReader(new FileReader(path));
-		
+		this.buffer = new BufferedReader(new FileReader(path));	
 	}
 	
-	public boolean nextLine() {
+	public boolean hasNextLine() {
         if (this.isinEOF) {
             return false;
         }
@@ -39,6 +37,7 @@ public class Lexic {
             while (line == null || !line.matches("end_pgm")  ) {
                 line = buffer.readLine();
                 currentLine++;
+                currentColumn = 0;
                 
                 if (line == null) {
                     this.isinEOF = true;
@@ -46,7 +45,13 @@ public class Lexic {
                 }
                 currentContent = line;
                 System.out.printf("%4d  %s\n", currentLine + 1, currentContent);  
-                buildLexem(line);
+                
+                while(currentColumn < currentContent.length()) {
+                	Token token = nextToken();
+                	System.out.println( token.toString() );
+                	
+                }
+                
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -59,23 +64,7 @@ public class Lexic {
 			System.out.println(words[i] + "#");
 		}
 	}
-	
-	private void buildLexem(String line) {
-		lexemes = line.split("\\s+|;");
-		
-		for(int i = 0; i < lexemes.length; ++i) {
-			lexeme = lexemes[i];
-			Token token = nextToken();		
-		}
-	}
 
-	private char nextChar() {
-        currentColumn++;
-        if (currentColumn < currentContent.length())
-        	return currentContent.charAt(currentColumn);
-        return '\n';
-	}
-	
 	private Token_category findCategory(String value) {
         if (Table.keywords.containsKey(value)) { // is keyword?
             return Table.keywords.get(value);
@@ -116,26 +105,117 @@ public class Lexic {
         return Token_category.dlnull; // not found
     }
     
-	public Token nextToken() {
-		int doublequotes = 0;
-		Pattern pattern = Pattern.compile(".*\"([^\']*)\".*"); 
-		Matcher matcher = pattern.matcher(line);
-	      
-		if(!lexeme.isEmpty()) {
-			if(lexeme.startsWith("\"")) {
-			      doublequotes = 1;		
-			}
-			if(doublequotes == 1 && lexeme.endsWith("\"")) {
-				lexeme = "\""+matcher.group(1)+"\"";
-				doublequotes = 0;	
-			}
-			if(doublequotes == 0) {
-				Token<Object> token = new Token<Object>( lexeme, currentLine, i, findCategory( lexeme ));
-				System.out.println(token.toString());
-				return token;
-			}
-		}
-		return null;
-	}
+    public Token nextToken() {
+        char c = currentContent.charAt(currentColumn);
+        while (c == ' ' || c == '\t') {
+            c = nextChar();
+        }
+		
+        Token token;
+        int tLine = currentLine;
+        int tColumn = currentColumn;
+        StringBuilder lexema = new StringBuilder();
+
+        if (Character.toString(c).matches("\\d")) {
+            boolean floatDetected = false;
+            while (Character.toString(c).matches("\\d") || (!floatDetected && c == '.')) {
+                if (c == '.') {
+                    floatDetected = true;
+                }
+
+                lexema.append(c);
+                c = nextChar();
+            }
+        }else if( Character.toString(c).matches("\\w") ) {
+        	while (Character.toString(c).matches("\\w")) {
+                lexema.append(c);
+                c = nextChar();
+            }
+        }
+
+        if (lexema.length() == 0) {
+            if (c == '"') { // begin of a string
+            	lexema.append(c);
+                c = nextChar();
+                while (c != '"') { // reads until finds "
+                	lexema.append(c);
+                    c = nextChar();
+
+                    if (c == '\n') {
+                        printError(tLine, currentColumn + 1, "caractere '\"' esperado");
+                        return null;
+                    }
+                }
+                lexema.append(c);
+                currentColumn++;
+            } else if (c == '\'') {
+            	lexema.append(c);
+                c = nextChar();
+                if (c == '\\') {
+                    c = nextChar();
+                }
+                lexema.append(c);
+                c = nextChar();
+                if (c == '\'') {
+                	lexema.append(c);
+                    currentColumn++;
+                } else {
+                    printError(tLine, currentColumn + 1, "caractere '\'' esperado");
+                    return null;
+                }
+            } else if (c == '<' || c == '=' || c == '>') {
+            	lexema.append(c);
+                c = nextChar();
+                if (c == '=') {
+                	lexema.append(c);
+                    currentColumn++;
+                }
+            } else if (c == '&') {
+            	lexema.append(c);
+                c = nextChar();
+                if (c == '&') {
+                	lexema.append(c);
+                    currentColumn++;
+                } else {
+                    printError(tLine, currentColumn + 1, "caractere '&' esperado");
+                    return null;
+                }
+            } else if (c == '|') {
+            	lexema.append(c);
+                c = nextChar();
+                if (c == '|') {
+                	lexema.append(c);
+                    currentColumn++;
+                } else {
+                    printError(tLine, currentColumn + 1, "caractere '|' esperado");
+                    return null;
+                }
+            } else {
+            	lexema.append(c);
+                currentColumn++;
+            }
+        }
+        String value = lexema.toString().trim();
+        token = new Token(value, tLine, tColumn, findCategory(value));
+        
+        if (token.getCategory() == Token_category.unknown) {
+            printError(token.getTokenLine(), token.getTokenColumn(), "'" + token.getValue() +"' inesperado");
+        }
+
+        return token;
+    }
+
+    private char nextChar() {
+        currentColumn++;
+        if (currentColumn < currentContent.length()) {
+            return currentContent.charAt(currentColumn);
+        }
+        return '\n';
+    }
+    
 	
+    private void printError(int line, int column, String message) {
+        System.err.printf("Erro! [Linha %d, coluna %d]: %s.", line, column, message);
+    }
+    
 }

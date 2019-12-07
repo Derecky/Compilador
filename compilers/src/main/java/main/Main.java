@@ -11,9 +11,8 @@ public class Main
 	
     public static void main( String[] args ) throws FileNotFoundException 
     {
-        String path = "./resources/Shellsort.cpp";
-        Lexic lexema = new Lexic(path);
-        
-        lexema.nextLine();
+        //String path = "./resources/HelloWorld.cpp";
+        Lexic lexema = new Lexic(args[0]);
+        lexema.hasNextLine();
     }       
 }

@@ -82,6 +82,4 @@ public class Table {
         scopeTokens.add('"');
         scopeTokens.add(':');
     }
-
-//    NOT USED: id, consNumInt, consNumFlo, consBool, consChar, consString,
 }
