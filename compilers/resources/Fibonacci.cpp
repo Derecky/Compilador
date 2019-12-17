@@ -4,7 +4,7 @@ pgm
     prev = 0 ;
     atual = 1 ;
     count = 0 ;
-    
+    11.1f
     while ( atual < n ) {
         if ( count == 0 ) {
             print ( prev + ", " ) ;

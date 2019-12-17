@@ -31,6 +31,7 @@ public class Table {
         keywords.put("to", Token_category.to);
         keywords.put("pgm", Token_category.pgm);
         keywords.put("end_pgm", Token_category.endpgm);
+        keywords.put("null", Token_category.dlnull);
 
         delimiters.put(";", Token_category.semicolon);
         delimiters.put("[", Token_category.squarebeg);

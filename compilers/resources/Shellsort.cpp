@@ -33,3 +33,6 @@ pgm
    print ( vet ) ;
   }
 end_pgm
+
+
+so pra testar

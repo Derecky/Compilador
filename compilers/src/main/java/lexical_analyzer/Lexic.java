@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import sintatic_analyzer.Sintatic;
+
 
 public class Lexic {
 	private String currentContent;
@@ -34,7 +36,8 @@ public class Lexic {
         try {
         	line = currentContent != null ? currentContent.substring(currentColumn) : null;
         	// ler a linha
-            while (line == null || !line.matches("end_pgm")  ) {
+            while (line == null || !line.matches("end_pgm")) {
+            	
                 line = buffer.readLine();
                 currentLine++;
                 currentColumn = 0;
@@ -48,10 +51,10 @@ public class Lexic {
                 
                 while(currentColumn < currentContent.length()) {
                 	Token token = nextToken();
-                	System.out.println( token.toString() );
-                	
-                }
-                
+                	Sintatic sint = new Sintatic(token);
+                	if(token != null)
+                		System.out.println( token.toString() );	
+                }  
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -86,7 +89,7 @@ public class Lexic {
         if(tokenValue.matches("\\d+")) { // get int
             return Token_category.dlint;
            
-        } else if(tokenValue.matches("(\\d)+\\.(\\d)+")) { // get real
+        } else if(tokenValue.matches("(\\d)+\\.(\\d)+f?")) { // get real
             return Token_category.dlreal;
             
         } else if(tokenValue.startsWith("\"") && tokenValue.length() > 1 && tokenValue.endsWith("\"")) { // get string
@@ -107,8 +110,11 @@ public class Lexic {
     
     public Token nextToken() {
         char c = currentContent.charAt(currentColumn);
-        while (c == ' ' || c == '\t') {
+        while (c == ' '  ) {
             c = nextChar();
+        }
+        if(c == '\n' ) {
+        	return null;
         }
 		
         Token token;
@@ -117,15 +123,19 @@ public class Lexic {
         StringBuilder lexema = new StringBuilder();
 
         if (Character.toString(c).matches("\\d")) {
-            boolean floatDetected = false;
-            while (Character.toString(c).matches("\\d") || (!floatDetected && c == '.')) {
+           boolean pointDetected = false;
+            while (Character.toString(c).matches("\\d|[.]") ) {
                 if (c == '.') {
-                    floatDetected = true;
+                	pointDetected = true;
                 }
-
                 lexema.append(c);
                 c = nextChar();
             }
+            if(c == 'f') {
+            	lexema.append(c);
+                c = nextChar();
+            }
+            
         }else if( Character.toString(c).matches("\\w") ) {
         	while (Character.toString(c).matches("\\w")) {
                 lexema.append(c);
