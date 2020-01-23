@@ -1,0 +1,130 @@
+   1  pgm
+          [0001, 0001] (0000,                  pgm) {pgm}
+   2    func void fibonacci ( int n ) {
+          [0002, 0003] (0020,                 func) {func}
+          [0002, 0008] (0006,               dlvoid) {void}
+          [0002, 0013] (0021,           identifier) {fibonacci}
+          [0002, 0023] (0047,           parenthbeg) {(}
+          [0002, 0025] (0001,                dlint) {int}
+          [0002, 0029] (0021,           identifier) {n}
+          [0002, 0031] (0048,            parentend) {)}
+          [0002, 0033] (0049,               keybeg) {{}
+   3      int prev , atual , temp , count ;
+          [0003, 0005] (0001,                dlint) {int}
+          [0003, 0009] (0021,           identifier) {prev}
+          [0003, 0014] (0053,                comma) {,}
+          [0003, 0016] (0021,           identifier) {atual}
+          [0003, 0022] (0053,                comma) {,}
+          [0003, 0024] (0021,           identifier) {temp}
+          [0003, 0029] (0053,                comma) {,}
+          [0003, 0031] (0021,           identifier) {count}
+          [0003, 0037] (0052,            semicolon) {;}
+   4      prev = 0 ;
+          [0004, 0005] (0021,           identifier) {prev}
+          [0004, 0010] (0044,               assign) {=}
+          [0004, 0012] (0001,                dlint) {0}
+          [0004, 0014] (0052,            semicolon) {;}
+   5      atual = 1 ;
+          [0005, 0005] (0021,           identifier) {atual}
+          [0005, 0011] (0044,               assign) {=}
+          [0005, 0013] (0001,                dlint) {1}
+          [0005, 0015] (0052,            semicolon) {;}
+   6      count = 0 ;
+          [0006, 0005] (0021,           identifier) {count}
+          [0006, 0011] (0044,               assign) {=}
+          [0006, 0013] (0001,                dlint) {0}
+          [0006, 0015] (0052,            semicolon) {;}
+   7      11.1f
+          [0007, 0005] (0002,               dlreal) {11.1f}
+   8      while ( atual < n ) {
+          [0008, 0005] (0010,              dlwhile) {while}
+          [0008, 0011] (0047,           parenthbeg) {(}
+          [0008, 0013] (0021,           identifier) {atual}
+          [0008, 0019] (0039,              smaller) {<}
+          [0008, 0021] (0021,           identifier) {n}
+          [0008, 0023] (0048,            parentend) {)}
+          [0008, 0025] (0049,               keybeg) {{}
+   9          if ( count == 0 ) {
+          [0009, 0009] (0008,                 dlif) {if}
+          [0009, 0012] (0047,           parenthbeg) {(}
+          [0009, 0014] (0021,           identifier) {count}
+          [0009, 0020] (0027,                   eq) {==}
+          [0009, 0023] (0001,                dlint) {0}
+          [0009, 0025] (0048,            parentend) {)}
+          [0009, 0027] (0049,               keybeg) {{}
+  10              print ( prev + ", " ) ;
+          [0010, 0013] (0019,                print) {print}
+          [0010, 0019] (0047,           parenthbeg) {(}
+          [0010, 0021] (0021,           identifier) {prev}
+          [0010, 0026] (0031,                 plus) {+}
+          [0010, 0028] (0003,             dlstring) {", "}
+          [0010, 0033] (0048,            parentend) {)}
+          [0010, 0035] (0052,            semicolon) {;}
+  11              count = count + 1 ;
+          [0011, 0013] (0021,           identifier) {count}
+          [0011, 0019] (0044,               assign) {=}
+          [0011, 0021] (0021,           identifier) {count}
+          [0011, 0027] (0031,                 plus) {+}
+          [0011, 0029] (0001,                dlint) {1}
+          [0011, 0031] (0052,            semicolon) {;}
+  12          }
+          [0012, 0009] (0050,               keyend) {}}
+  13          else {
+          [0013, 0009] (0009,               dlelse) {else}
+          [0013, 0014] (0049,               keybeg) {{}
+  14              print ( atual + ", " ) ;
+          [0014, 0013] (0019,                print) {print}
+          [0014, 0019] (0047,           parenthbeg) {(}
+          [0014, 0021] (0021,           identifier) {atual}
+          [0014, 0027] (0031,                 plus) {+}
+          [0014, 0029] (0003,             dlstring) {", "}
+          [0014, 0034] (0048,            parentend) {)}
+          [0014, 0036] (0052,            semicolon) {;}
+  15              temp = prev + atual ;
+          [0015, 0013] (0021,           identifier) {temp}
+          [0015, 0018] (0044,               assign) {=}
+          [0015, 0020] (0021,           identifier) {prev}
+          [0015, 0025] (0031,                 plus) {+}
+          [0015, 0027] (0021,           identifier) {atual}
+          [0015, 0033] (0052,            semicolon) {;}
+  16              prev = atual ;
+          [0016, 0013] (0021,           identifier) {prev}
+          [0016, 0018] (0044,               assign) {=}
+          [0016, 0020] (0021,           identifier) {atual}
+          [0016, 0026] (0052,            semicolon) {;}
+  17              atual = temp ;
+          [0017, 0013] (0021,           identifier) {atual}
+          [0017, 0019] (0044,               assign) {=}
+          [0017, 0021] (0021,           identifier) {temp}
+          [0017, 0026] (0052,            semicolon) {;}
+  18          }
+          [0018, 0009] (0050,               keyend) {}}
+  19      }
+          [0019, 0005] (0050,               keyend) {}}
+  20    }
+          [0020, 0003] (0050,               keyend) {}}
+  21    
+  22    main {
+          [0022, 0003] (0014,                 main) {main}
+          [0022, 0008] (0049,               keybeg) {{}
+  23      int n ;
+          [0023, 0005] (0001,                dlint) {int}
+          [0023, 0009] (0021,           identifier) {n}
+          [0023, 0011] (0052,            semicolon) {;}
+  24      read ( n ) ;
+          [0024, 0005] (0021,           identifier) {read}
+          [0024, 0010] (0047,           parenthbeg) {(}
+          [0024, 0012] (0021,           identifier) {n}
+          [0024, 0014] (0048,            parentend) {)}
+          [0024, 0016] (0052,            semicolon) {;}
+  25      fibonacci ( n ) ;
+          [0025, 0005] (0021,           identifier) {fibonacci}
+          [0025, 0015] (0047,           parenthbeg) {(}
+          [0025, 0017] (0021,           identifier) {n}
+          [0025, 0019] (0048,            parentend) {)}
+          [0025, 0021] (0052,            semicolon) {;}
+  26    }
+          [0026, 0003] (0050,               keyend) {}}
+  27    
+  28  end_pgm
+          [0028, 0001] (0015,               endpgm) {end_pgm}
