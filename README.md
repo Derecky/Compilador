@@ -1,8 +1,8 @@
 
 
-Para executar o  código na ide Eclipse:
-    - Atualize o projeto por meio do arquivo pom.xml;
-    - Aperte em run configurations:
+Para executar o  código na ide Eclipse: 
+-  Atualize o projeto por meio do arquivo pom.xml 
+-  Aperte em run configurations:
     
         - Adicione o arquivo de entrada nos argumentos:
             - Após criar um novo Java Application, vá em Arguments e adicione em Program arguments: ./resources/'nome_do_arquivo'.cpp
@@ -15,4 +15,4 @@ Para executar o  código na ide Eclipse:
     - Aperte Apply e Run
     
 
-Os arquivos de entradas estão em ./resources/ e de saídas estão em ./resources/outputs/
+- Os arquivos de entradas estão em ./resources/ e de saídas estão em ./resources/outputs/
