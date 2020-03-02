@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import sintatic_analyzer.Sintatic;
 
 
 public class Lexic {
@@ -49,12 +48,11 @@ public class Lexic {
                 currentContent = line;
                 System.out.printf("%4d  %s\n", currentLine + 1, currentContent);  
                 
-                while(currentColumn < currentContent.length()) {
-                	Token token = nextToken();
-                	Sintatic sint = new Sintatic(token);
-                	if(token != null)
-                		System.out.println( token.toString() );	
-                }  
+                //while(currentColumn < currentContent.length()) {
+                //	Token token = nextToken();
+                //	if(token != null)
+                //		System.out.println( token.toString() );	
+                //}  
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -110,12 +108,12 @@ public class Lexic {
     
     public Token nextToken() {
         char c = currentContent.charAt(currentColumn);
-        while (c == ' '  ) {
+        while (c == ' ' || c == '\n' ) {
             c = nextChar();
         }
-        if(c == '\n' ) {
-        	return null;
-        }
+//        if(c == '\n' ) {
+//        	return null;
+//        }
 		
         Token token;
         int tLine = currentLine;

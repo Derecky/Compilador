@@ -1,0 +1,113 @@
+1 S = Prg
+
+2 Prg = 'PGM' Code 'END_PGM'
+
+3 Code = DeclVar Code
+4 Code = DeclVar
+5 Code = DeclFunc Code
+6 Code = DeclFunc
+
+7 DeclVar =  RealType 'SEMICOLON'
+8 DeclVar =  RealType 'COMMA' DeclVar
+9 DeclVar =  RealType 'ASSIGN' Expression 'SEMICOLON'
+10 DeclVar =  RealType 'ASSIGN'  Expression 'COMMA' DeclVar
+
+11 RealType = TypeAtomic 'IDENTIFIER'
+12 RealType = TypeAtomic 'IDENTIFIER' 'SQUAREBEG' Expression 'SQUAREEND'
+
+13 TypeAtomic = 'LDINT'
+14 TypeAtomic = 'DLREAL'
+15 TypeAtomic = 'DLSTRING'
+16 TypeAtomic = 'DLCHAR'
+17 TypeAtomic = 'DLBOOL'
+18 TypeAtomic = 'DLARRAY'
+
+19 Literal = 'LIT_INT'
+20 Literal = 'LIT_REAL'
+21 Literal = 'LIT_CHAR'
+22 Literal = 'LIT_STRING'
+23 Literal = 'LIT_BOOL'
+
+24 Expression = ExprLogicOr
+
+25 ExprLogicOr = ExprLogicOr 'OR' ExprLogicAnd
+26 ExprLogicOr = ExprLogicAnd
+27 ExprLogicAnd = ExprLogicAnd 'AND' ExprEquals
+28 ExprLogicAnd = ExprEquals
+29 ExprEquals = ExprEquals 'EQ' ExprAditiv
+
+30 ExprEquals = ExprMult 'DIFF' ExprAditiv  
+31 ExprEquals = ExprMult 'SMALLER' ExprAditiv
+32 ExprEquals = ExprMult 'SMALLERE' ExprAditiv
+33 ExprEquals = ExprMult  'GREATER' ExprAditiv
+34 ExprEquals = ExprMult 'GREATERE' ExprAditiv
+
+35 ExprEquals = ExprAditiv
+36 ExprAditiv = ExprAditiv 'PLUS' ExprMult
+37 ExprAditiv = ExprAditiv 'MINUS' ExprMult
+38 ExprAditiv = ExprMult
+39 ExprMult = ExprMult 'MULT' ExprExp
+40 ExprMult = ExprExp
+
+41 ExprExp = ExprExp 'POW' ExprUnitary
+42 ExprExp = ExprUnitary
+43 ExprUnitary = 'UNARY' ExprUnitary
+44 ExprUnitary = 'NOT' ExprUnitary
+45 ExprUnitary = 'PARENTHBEG' ExprLogicOr 'PARENTHEND'
+46 ExprUnitary = 'IDENTIFIER' 
+47 ExprUnitary = 'IDENTIFIER' MatrixIndex
+48 ExprUnitary = 'IDENTIFIER' FuncParamsReal
+49 ExprUnitary = Literal
+
+50 ExpressionList = Expression
+51 ExpressionList = ExpressionList 'COMMA' Expression
+
+52 MatrixIndex = 'SQUAREBEG' Expression 'SQUAREEND'
+
+53 Assign = 'IDENTIFIER' 'ASSIGN' Expression 'SEMICOLON'
+54 Assign = 'IDENTIFIER' MatrixIndex 'ASSIGN' Expression 'SEMICOLON'
+
+55 LoopWhCom = 'DLWHILE' 'PARENTHBEG' Expression 'PARENTHEND' Scope
+
+#56 Step = 'IDENTIFIER' 'ASSIGN' Expression
+
+57 CondCom = 'DLIF' 'PARENTHBEG' Expression 'PARENTHEND'  Scope
+58 CondCom = 'DLIF' 'PARENTHBEG' Expression 'PARENTHEND' Scope 'DLELSE' Scope
+
+59 PrintCom = 'PRINT' 'PARENTHBEG' 'DLSTRING' 'PARENTHEND' 'SEMICOLON'
+60 PrintCom = 'PRINT' 'PARENTHBEG' 'DLSTRING' 'COMMA' ExpressionList 'PARENTHEND' 'SEMICOLON'
+
+61 ReadCom = 'READ' 'PARENTHBEG'  'DLSTRING' 'PARENTHEND' 'SEMICOLON'
+62 ReadCom = 'READ' 'PARENTHBEG'  'DLSTRING' 'COMMA' ExpressionList 'PARENTHEND' 'SEMICOLON'
+
+63 CallFunc = 'READ' FuncParamsReal 'SEMICOLON'
+
+64 DeclFunc = 'MAIN' Scope
+65 DeclFunc =  SpecReturnType FuncParamsFormal Scope
+
+66 SpecReturnType = 'DLVOID' 'IDENTIFIER' 
+67 SpecReturnType = TypeAtomic'IDENTIFIER' 
+
+68 TypeArrayUndefined = TypeAtomic 'SQUAREBEG' 'SQUAREEND'
+
+69 FuncParamsReal = 'PARENTHBEG'  'PARENTHEND'
+70 FuncParamsReal = 'PARENTHBEG'  ExpressionList 'PARENTHEND'
+
+71 Scope = 'KEYBEG' 'KEYEND'
+72 Scope = 'KEYBEG' Commands 'KEYEND'
+
+73 Commands = DeclVar Commands
+74 Commands = DeclVar
+75 Commands = Assign Commands
+76 Commands = Assign
+77 Commands = LoopWhCom Commands
+78 Commands = LoopWhCom
+79 Commands = CondCom Commands
+80 Commands = CondCom
+81 Commands = PrintCom Commands
+82 Commands = PrintCom
+83 Commands = ReadCom Commands
+84 Commands = ReadCom
+85 Commands = CallFunc Commands
+86 Commands = CallFunc
+87 Commands = 'DLRETURN' Expression 'SEMICOLON'
