@@ -16,14 +16,14 @@ public class Main
 	
     public static void main( String[] args ) throws IOException 
     {
-        //String path = "./resources/HelloWorld.cpp";
+        // ./resources/HelloWorld.cpp  ./resources/grammar/grammar.txt ./resources/srl-tables/Tabela_SLR_Acao.csv  ./resources/srl-tables/Tabela_SLR_Transicao.csv
         Lexic lexema = new Lexic(args[0]);
         //lexema.hasNextLine();
         
         
-        // ./resources/HelloWorld.cpp  ./resources/grammar/grammar.txt
+         
         Grammar grammar = new Grammar(args[1]); 
-        // ./resources/srl-tables/Tabela_SLR_Acao.csv  ./resources/srl-tables/Tabela_SLR_Transicao.csv
+         
         SLRTable slrTableAction = new SLRTable(args[2]);
         SLRTable slrTableTransition = new SLRTable(args[3]);
 
