@@ -1,0 +1,16 @@
+   1  pgm
+          [0001, 0001] (0000,                  pgm) {pgm}
+   2    main{
+          [0002, 0003] (0014,                 main) {main}
+          [0002, 0007] (0049,               keybeg) {{}
+   3      print("Alo mundo!");
+          [0003, 0005] (0019,                print) {print}
+          [0003, 0010] (0047,           parenthbeg) {(}
+          [0003, 0011] (0003,             dlstring) {"Alo mundo!"}
+          [0003, 0023] (0048,           parenthend) {)}
+          [0003, 0024] (0052,            semicolon) {;}
+   4    }
+          [0004, 0003] (0050,               keyend) {}}
+   5  end_pgm
+          [0005, 0001] (0015,              end_pgm) {end_pgm}
+ACEITO!
