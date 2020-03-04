@@ -1,0 +1,8 @@
+./resources/HelloWorld.cpp  ./resources/grammar/grammar.txt ./resources/srl-tables/Tabela_SLR_Acao.csv  ./resources/srl-tables/Tabela_SLR_Transicao.csv
+
+
+
+./resources/Fibonacci.cpp  ./resources/grammar/grammar.txt ./resources/srl-tables/Tabela_SLR_Acao.csv  ./resources/srl-tables/Tabela_SLR_Transicao.csv
+
+
+./resources/Shelsort.cpp  ./resources/grammar/grammar.txt ./resources/srl-tables/Tabela_SLR_Acao.csv  ./resources/srl-tables/Tabela_SLR_Transicao.csv

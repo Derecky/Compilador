@@ -3,3 +3,37 @@ pgm
 	print ( a ) ;
 	int d = 2 + 3 ;
 end_pgm
+
+
+pgm
+int n;
+  void func fibonacci ( ) {
+    int prev   ;
+    int atual  ;
+    int count;
+
+  }
+  
+  main {
+    print("AAAA");
+  }
+  
+end_pgm
+
+
+pgm
+int n ;
+  void func fibonacci ( int a ) {
+    int prev    ;
+    int atual  ;
+    int count;
+
+  }
+  
+  main {
+    print("AAAA");
+  }
+  
+end_pgm
+
+

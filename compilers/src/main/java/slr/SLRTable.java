@@ -15,6 +15,10 @@ public class SLRTable {
             long archiveSize = csvFile.length();
             FileInputStream csvFileStream = new FileInputStream(path);
             LineNumberReader lineNumberReader = new LineNumberReader(new InputStreamReader(csvFileStream));
+            
+            //System.out.println( csvFile.length());
+            
+            
             lineNumberReader.skip(archiveSize);
             this.tableContentNumLines = lineNumberReader.getLineNumber() - 1;
             int lineCounter = 0;
@@ -26,28 +30,35 @@ public class SLRTable {
             tableHeader = new HashMap();
 
             line = buffer.readLine();
-            for (String column : line.split(";")) {
+            //System.out.println(line);
+            for (String column : line.split(",")) {
                 this.tableHeader.put(column.replace("'", ""), lineCounter);
                 lineCounter++;
             }
-
+            //System.out.println(tableHeader);
             this.tableContentNumColumns = lineCounter;
             tableContent = new String[this.tableContentNumLines][this.tableContentNumColumns];
             lineCounter = 0;
-
+            //System.out.println("A  " + this.tableContentNumLines +" N  " + this.tableContentNumColumns);
             line =  buffer.readLine();
+            //System.out.println(tableHeader.size());
             while (line != null) {
                 int columnCounter = 0;
                 StringBuilder element = new StringBuilder();
+                
                 for (char c : line.toCharArray()) {
-                    if (c == ';') {
+                	//System.out.println(c);
+                    if (c == ',' ) {
+                    	//System.out.println(lineCounter +  columnCounter);
                         tableContent[lineCounter][columnCounter] = element.length() == 0 ? null : element.toString();
                         element.setLength(0);
                         columnCounter++;
                     } else if (c != '\'') {
+                    	//System.out.println("PS" );
                         element.append(c);
                     }
                 }
+                
                 tableContent[lineCounter][columnCounter] = element.length() == 0 ? null : element.toString();
 
                 lineCounter++;

@@ -26,18 +26,18 @@ public class Table {
         keywords.put("print", Token_category.print);
         keywords.put("return", Token_category.dlreturn);
         keywords.put("void", Token_category.dlvoid);
-        keywords.put("from", Token_category.from);
         keywords.put("func", Token_category.func);
+        keywords.put("from", Token_category.from);
         keywords.put("to", Token_category.to);
         keywords.put("pgm", Token_category.pgm);
-        keywords.put("end_pgm", Token_category.endpgm);
+        keywords.put("end_pgm", Token_category.end_pgm);
         keywords.put("null", Token_category.dlnull);
 
         delimiters.put(";", Token_category.semicolon);
         delimiters.put("[", Token_category.squarebeg);
         delimiters.put("]", Token_category.squareend);
         delimiters.put("(", Token_category.parenthbeg);
-        delimiters.put(")", Token_category.parentend);
+        delimiters.put(")", Token_category.parenthend);
         delimiters.put("{", Token_category.keybeg);
         delimiters.put("}", Token_category.keyend);
 

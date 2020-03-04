@@ -7,15 +7,16 @@ Code = DeclVar
 Code = DeclFunc Code
 Code = DeclFunc
 
-DeclVar =  RealType 'SEMICOLON'
-DeclVar =  RealType 'COMMA' DeclVar
-DeclVar =  RealType 'ASSIGN' Expression 'SEMICOLON'
-DeclVar =  RealType 'ASSIGN'  Expression 'COMMA' DeclVar
+DeclVar = RealType 'SEMICOLON'
+DeclVar = RealType 'COMMA' DeclVar
+DeclVar = RealType 'ASSIGN' Expression 'SEMICOLON'
+DeclVar = RealType 'ASSIGN' Expression 'COMMA' DeclVar
 
 RealType = TypeAtomic 'IDENTIFIER'
 RealType = TypeAtomic 'IDENTIFIER' 'SQUAREBEG' Expression 'SQUAREEND'
 
-TypeAtomic = 'LDINT'
+
+TypeAtomic = 'DLINT'
 TypeAtomic = 'DLREAL'
 TypeAtomic = 'DLSTRING'
 TypeAtomic = 'DLCHAR'
@@ -49,7 +50,6 @@ ExprAditiv = ExprMult
 ExprMult = ExprMult 'MULT' ExprExp
 ExprMult = ExprExp
 
-
 ExprExp = ExprExp 'POW' ExprUnitary
 ExprExp = ExprUnitary
 ExprUnitary = 'UNARY' ExprUnitary
@@ -62,7 +62,6 @@ ExprUnitary = Literal
 
 
 ExpressionList = Expression
-ExpressionList = ExpressionList 'COMMA' Expression
 
 MatrixIndex = 'SQUAREBEG' Expression 'SQUAREEND'
 
@@ -85,15 +84,19 @@ ReadCom = 'READ' 'PARENTHBEG'  'DLSTRING' 'COMMA' ExpressionList 'PARENTHEND' 'S
 CallFunc = 'READ' FuncParamsReal 'SEMICOLON'
 
 DeclFunc = 'MAIN' Scope
-DeclFunc =  SpecReturnType FuncParamsFormal Scope
+DeclFunc =  TypeAtomic 'FUNC' 'IDENTIFIER' FuncParamsReal Scope
+DeclFunc =  'DLVOID' 'FUNC' 'IDENTIFIER' FuncParamsReal Scope
 
 SpecReturnType = 'DLVOID' 'IDENTIFIER' 
-SpecReturnType = TypeAtomic'IDENTIFIER' 
+SpecReturnType = TypeAtomic 'IDENTIFIER'
 
 TypeArrayUndefined = TypeAtomic 'SQUAREBEG' 'SQUAREEND'
 
-FuncParamsReal = 'PARENTHBEG'  'PARENTHEND'
-FuncParamsReal = 'PARENTHBEG'  ExpressionList 'PARENTHEND'
+FuncParamsReal = 'PARENTHBEG' 'PARENTHEND'
+FuncParamsReal = 'PARENTHBEG' Parameters 'PARENTHEND'
+
+Parameters = Parameters 'COMMA' RealType 
+Parameters = RealType
 
 Scope = 'KEYBEG' 'KEYEND'
 Scope = 'KEYBEG' Commands 'KEYEND'

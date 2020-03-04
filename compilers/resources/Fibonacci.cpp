@@ -1,5 +1,5 @@
 pgm
-  func void fibonacci ( int n ) {
+  void func fibonacci ( int n ) {
     int prev , atual , temp , count ;
     prev = 0 ;
     atual = 1 ;

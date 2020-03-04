@@ -20,15 +20,13 @@ public class Main
         Lexic lexema = new Lexic(args[0]);
         //lexema.hasNextLine();
         
-        
-         
         Grammar grammar = new Grammar(args[1]); 
          
         SLRTable slrTableAction = new SLRTable(args[2]);
         SLRTable slrTableTransition = new SLRTable(args[3]);
 
-        assert slrTableAction != null;
-        assert slrTableTransition != null;
+        //assert slrTableAction != null;
+        //assert slrTableTransition != null;
 
        Syntactic syntactic = new Syntactic(lexema, grammar, slrTableAction, slrTableTransition);
        syntactic.analyze();

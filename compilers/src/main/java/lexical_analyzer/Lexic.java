@@ -35,7 +35,7 @@ public class Lexic {
         try {
         	line = currentContent != null ? currentContent.substring(currentColumn) : null;
         	// ler a linha
-            while (line == null || !line.matches("end_pgm")) {
+            while (line == null || !line.matches("[\\s]*[^\\s].*")) {
             	
                 line = buffer.readLine();
                 currentLine++;

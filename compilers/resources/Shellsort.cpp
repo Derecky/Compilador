@@ -1,7 +1,7 @@
 pgm
-  int vet [ 10 ] ;
-  int n ;
-  int func shellsort ( int v [ ] , int tam ) {
+  int v [ ] , int tam;
+  
+  int shellsort (  ) {
     
     int i , j , h ;
     int gap = 1 ;
@@ -25,14 +25,12 @@ pgm
   }
   
   main {
-   vet = [ 2 , 3 , 4 , 0 , 9 , 7 , 8 , 1 , 5 , 6 ] ;
+	int vet [ 10 ] = [ 2 , 3 , 4 , 0 , 9 , 7 , 8 , 1 , 5 , 6 ] ;
    
-   int x ;
-   print ( vet ) ;
-   vet = shellsort ( vet , 10 ) ;
-   print ( vet ) ;
+    int x ;
+    print ( vet ) ;
+    vet = shellsort ( vet , 10 ) ;
+    print ( vet ) ;
   }
 end_pgm
 
-
-so pra testar
